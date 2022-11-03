@@ -49,22 +49,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun equalsClick(clickedView: View){
-        val secondOperand = result.text.toString().toDouble()
-        when (operation) {
-            "+" -> result.text = (operand + secondOperand).toString()
-            "-" -> result.text = (operand - secondOperand).toString()
-            "*" -> result.text = (operand * secondOperand).toString()
-            "/" -> result.text = (operand / secondOperand).toString()
-        }
-        if (result.text.toString().takeLast(2) == ".0") {
-            result.text = result.text.toString().dropLast(2)
-        }else if (result.text.toString() == "Infinity" || result.text.toString() == "NaN"){
-            Toast.makeText(applicationContext,"ასეთი რიცხვი არ არსებობს", Toast.LENGTH_LONG).show()
-        }
-        else {result.text = result.text.toString()}
+        if (clickedView is TextView)  {
+            if (result.text != "" && operation != ""){
 
-        operation = ""
-        operand = 0.0
+                val secondOperand = result.text.toString().toDouble()
+
+                when (operation) {
+                    "+" -> result.text = (operand + secondOperand).toString()
+                    "-" -> result.text = (operand - secondOperand).toString()
+                    "*" -> result.text = (operand * secondOperand).toString()
+                    "/" -> result.text = (operand / secondOperand).toString()
+                }
+
+            }
+
+            if (result.text.toString().takeLast(2) == ".0") {
+                result.text = result.text.toString().dropLast(2)
+            }
+            else {result.text = result.text.toString()}
+
+            if (result.text.toString() == "Infinity" || result.text.toString() == "NaN"){
+                Toast.makeText(applicationContext,"ასეთი რიცხვი არ არსებობს", Toast.LENGTH_LONG).show()
+
+
+            }
+
+            operation = ""
+            operand = 0.0
+
+        }
+
 
     }
 
