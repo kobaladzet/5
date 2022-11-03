@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +58,8 @@ class MainActivity : AppCompatActivity() {
         }
         if (result.text.toString().takeLast(2) == ".0") {
             result.text = result.text.toString().dropLast(2)
+        }else if (result.text.toString() == "Infinity" || result.text.toString() == "NaN"){
+            Toast.makeText(applicationContext,"ასეთი რიცხვი არ არსებობს", Toast.LENGTH_LONG).show()
         }
         else {result.text = result.text.toString()}
 
