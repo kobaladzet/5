@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun opoerationClick(clickedView: View) {
+    fun operationClick(clickedView: View) {
         if (clickedView is TextView){
             if (result.text.toString() != "") {
                 operand = result.text.toString().toDouble()
@@ -55,10 +55,13 @@ class MainActivity : AppCompatActivity() {
             "*" -> result.text = (operand * secondOperand).toString()
             "/" -> result.text = (operand / secondOperand).toString()
         }
-        result.text.toString()
-        if (result.toString().slice(result.text.toString().length - 2 until result.toString().length) == ".0") {
+        if (result.text.toString().takeLast(2) == ".0") {
             result.text = result.text.toString().dropLast(2)
         }
+        else {result.text = result.text.toString()}
+
+        operation = ""
+        operand = 0.0
 
     }
 
@@ -66,6 +69,8 @@ class MainActivity : AppCompatActivity() {
     fun tvClear(clickedView: View){
         if (clickedView is TextView) {
             result.text = "0"
+            operand = 0.0
+            operation =""
         }
     }
     fun dot(clickedView: View){
@@ -73,8 +78,8 @@ class MainActivity : AppCompatActivity() {
             if (result.text.toString() == "") {
                 result.text = "0."
             } else if ("." !in result.text.toString()) {
-                val tempText = result.text.toString() + "."
-                result.text = tempText
+                val newText = result.text.toString() + "."
+                result.text = newText
             }
         }
     }
